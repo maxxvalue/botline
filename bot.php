@@ -16,8 +16,10 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		}
 		
 		/*เช็ค Userid Line*/
+		if($replytext=='/id'){
 		$textusernew=$event['source']['userId'];
 		$textLineid='LINE ID: '.$textusernew;
+		}
 		
 		
 		//สร้างข้อความตอบกลับ
