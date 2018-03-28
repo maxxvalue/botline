@@ -7,6 +7,9 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		$replyToken=$event['replyToken'];		//Token สำหรับส่งข้อความกลับ
 		$text=$event['message']['text'];		//รับค่าข้อความที่ส่งเข้ามาในตัวแปร text
 		
+		$usernew=$event['source'];
+		$textusernew=$event['source']['userId'];
+		
 		
 		if($text=='สวัสดี'){
 			$replytext='สวัสดีครับ';
@@ -14,6 +17,9 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		else{
 			$replytext=$text;
 		}
+		
+		$textusernew;
+		
 		//สร้างข้อความตอบกลับ
 		$messages = [
 			[
@@ -25,6 +31,7 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		$data = [
 			'replyToken' => $replyToken,		//replyToken ใส่ตรงนี้
 			'messages' => $messages,
+			'source' => $textusernew,
 		];
 		$post = json_encode($data);
 		$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
