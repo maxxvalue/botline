@@ -26,9 +26,10 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		}
 		
 		/*เช็ค roomId Line*/
-		if($text=='/idroom'){
+		//if($text=='/idroom')
+		{
 		$textroomid=$event['source']['roomId'];
-		$replytext='RoomID : '.$textroomid;
+		$replytext1='RoomID : '.$textroomid;
 		}
 		
 		//สร้างข้อความตอบกลับ
@@ -40,7 +41,7 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			,
 			[
 			'type' => 'room',
-			'text' => $replytext 
+			'text' => $replytext1
 			]
 		];
 		$url = 'https://api.line.me/v2/bot/message/reply';	//url สำหรับตอบกลับ
