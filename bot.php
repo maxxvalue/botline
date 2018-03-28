@@ -2,9 +2,8 @@
 $access_token='XK1Z6+XOO43h/LK5nIBkg63J7CrD4KupFFE64jlr9MubxnIhzBUoZWV4C1GQabfKOR00JPbAwXbxm3prq5WB53xBD2wk+GgBtblpHnz/o498xJFe9m+LKpipR4ezZ+U7kPHHfZStdK54yIj12BjK8wdB04t89/1O/w1cDnyilFU=';	//ใส่ access token ของเรา ****
 $content = file_get_contents('php://input');	//รับค่าจากล่องข้อความใน line
 $events = json_decode($content, true);			//เปลี่ยน json ที่ line ส่งมา ให้เป็น array
-$follow = json_decode($content, true);			//เปลี่ยน json ที่ line ส่งมา ให้เป็น array
-if (!is_null($events['events']) || is_null($follow['follow'])) {				//ตรวจสอบว่ามีข้อมูลส่งมาหรือไม่
-	foreach ($events['events'] as $event) || ($follow['follow'] as $event) {	
+if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข้อมูลส่งมาหรือไม่
+	foreach ($events['events'] as $event) {	
 		$replyToken=$event['replyToken'];		//Token สำหรับส่งข้อความกลับ
 		$text=$event['message']['text'];		//รับค่าข้อความที่ส่งเข้ามาในตัวแปร text
 		
@@ -17,7 +16,6 @@ if (!is_null($events['events']) || is_null($follow['follow'])) {				//ตรว�
 		}
 		
 		/*เช็ค Userid Line*/
-		$textusernew1=$follow['Follow']['timestamp'];
 		$textusernew=$event['source']['userId'];
 		$textLineid='LINE ID: '.$textusernew;
 		
@@ -27,11 +25,6 @@ if (!is_null($events['events']) || is_null($follow['follow'])) {				//ตรว�
 			[
 			'type' => 'text',
 			'text' => $replytext 
-			]
-			,
-			[
-			'type' => 'text',
-			'text' => $textusernew1 
 			]
 			,
 			[
@@ -56,4 +49,38 @@ if (!is_null($events['events']) || is_null($follow['follow'])) {				//ตรว�
 		curl_exec($ch);					//ส่งไปให้ไลน์ตอบกลับ
 	}
 }
-echo 'OK';
+echo 'OK Reply';
+
+$events1 = json_decode($content, true);			//เปลี่ยน json ที่ line ส่งมา ให้เป็น array
+if (!is_null($events1['events'])) {				//ตรวจสอบว่ามีข้อมูลส่งมาหรือไม่
+	foreach ($events1['events'] as $event1) {	
+		$replyToken=$event1['replyToken'];		//Token สำหรับส่งข้อความกลับ
+		
+		$textusernew111=$event1['source']['userId'];
+		
+		//สร้างข้อความตอบกลับ
+		$messages = [
+			[
+			'type' => 'text',
+			'text' => $textusernew111 
+			]
+		];
+		$url1 = 'https://api.line.me/v2/bot/profile/'.$textusernew111;	//url สำหรับตอบกลับ
+		$data1 = [
+			'replyToken' => $replyToken,		//replyToken ใส่ตรงนี้
+			'messages' => $messages,
+		];
+		$post1 = json_encode($data1);
+		$headers1 = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+														//headers สำหรับตอบกลับ
+		$ch1 = curl_init($url1);				//เริ่ม curl 
+		curl_setopt($ch1, CURLOPT_CUSTOMREQUEST, "POST");//ปรับเป็นแบบ post
+		curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);	
+		curl_setopt($ch1, CURLOPT_POSTFIELDS, $post1);	//ใส่ข้อความที่จะส่ง
+		curl_setopt($ch1, CURLOPT_HTTPHEADER, $headers1);	//ส่ง header
+		curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);	
+		curl_exec($ch1);					//ส่งไปให้ไลน์ตอบกลับ
+	}
+}
+echo 'OK Profile';
+?>
