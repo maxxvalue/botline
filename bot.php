@@ -41,7 +41,7 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		$url = 'https://api.line.me/v2/bot/message/reply';	//url สำหรับตอบกลับ
 		$url1 = 'https://api.line.me/v2/bot/profile/'.urlencode($textusernew);	//url Profile
 		$data = [
-			'replyToken' => $replyToken,		//replyToken ใส่ตรงนี้
+			'replyToken' => $replytext1,		//replyToken ใส่ตรงนี้
 			'messages' => $messages,
 		];
 		$post = json_encode($data);
