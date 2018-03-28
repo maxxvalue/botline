@@ -7,9 +7,6 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		$replyToken=$event['replyToken'];		//Token สำหรับส่งข้อความกลับ
 		$text=$event['message']['text'];		//รับค่าข้อความที่ส่งเข้ามาในตัวแปร text
 		
-		$usernew=$event['source'];
-		$textusernew=$event['source']['userId'];
-		
 		
 		if($text=='สวัสดี'){
 			$replytext='สวัสดีครับ';
@@ -18,7 +15,10 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			$replytext=$text;
 		}
 		
-		$textLineid='LINE ID :'.$textusernew;
+		/*เช็ค Userid Line*/
+		$textusernew=$event['source']['userId'];
+		$textLineid='LINE ID: ',$textusernew;
+		
 		
 		//สร้างข้อความตอบกลับ
 		$messages = [
