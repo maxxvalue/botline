@@ -17,7 +17,7 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		
 		/*เช็ค Userid Line*/
 		$textusernew=$event['source']['userId'];
-		$textLineid='LINE ID: ',$textusernew;
+		$textLineid='LINE ID: '.$textusernew;
 		
 		
 		//สร้างข้อความตอบกลับ
