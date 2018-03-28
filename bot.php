@@ -30,16 +30,11 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			,
 			[
 			'type' => 'text',
-			'text' => $replytext1
-			]
-			,
-			[
-			'type' => 'text',
 			'text' => $textLineid 
 			]
 		];
-		$url = 'https://api.line.me/v2/bot/message/reply';	//url สำหรับตอบกลับ
-		$url1 = 'https://api.line.me/v2/bot/profile/'.urlencode($textusernew);	//url Profile
+		//$url = 'https://api.line.me/v2/bot/message/reply';	//url สำหรับตอบกลับ
+		$url = 'https://api.line.me/v2/bot/profile/'.urlencode($textusernew);	//url Profile
 		$data = [
 			'replyToken' => $replytext1,		//replyToken ใส่ตรงนี้
 			'messages' => $messages,
@@ -54,14 +49,6 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);	//ส่ง header
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);	
 		curl_exec($ch);					//ส่งไปให้ไลน์ตอบกลับ
-		
-		$ch1 = curl_init($url1);				//เริ่ม curl 
-		curl_setopt($ch1, CURLOPT_CUSTOMREQUEST, "POST");//ปรับเป็นแบบ post
-		curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);	
-		curl_setopt($ch1, CURLOPT_POSTFIELDS, $post);	//ใส่ข้อความที่จะส่ง
-		curl_setopt($ch1, CURLOPT_HTTPHEADER, $headers);	//ส่ง header
-		curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);	
-		curl_exec($ch1);					//ส่งไปให้ไลน์ตอบกลับ
 	}
 }
 echo 'OK Reply';
