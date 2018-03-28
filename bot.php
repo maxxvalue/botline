@@ -8,32 +8,27 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		$text=$event['message']['text'];		//รับค่าข้อความที่ส่งเข้ามาในตัวแปร text
 		
 		
+		/*ตั้งคำ ถาม / คำตอบให้กับบอท*/
 		if($text=='สวัสดี'){
 			$replytext='สวัสดีครับ';
 		}
-		//else{
-			$replytext=$text;
-		//}
-		
+
 		/*BOT เชิญคนเข้ากลุ่ม + เช็คข้อมูล line*/
 		$AntiBot=$event['source']['userId'];
-		if($AntiBot != NULL){
-		//$replytext='ข้อมูลสมาชิกนี้ไม่ได้รับอนุญาติ';
-		}else{
+		if($AntiBot == ''){
 		$replytext='ข้อมูลสมาชิกนี้ไม่ได้รับอนุญาติ';
 		}
 		
-		
 		/*เช็ค Userid Line*/
 		if($text=='/iduser'){
-		$textusernew=$event['source']['userId'];
-		$replytext='LineID : '.$textusernew;
+		$textuserid=$event['source']['userId'];
+		$replytext='LineID : '.$textuserid;
 		}
 		
 		/*เช็ค roomId Line*/
 		if($text=='/idroom'){
-		$textusernew=$event['source']['roomId'];
-		$replytext='RoomID : '.$textusernew;
+		$textroomid=$event['source']['roomId'];
+		$replytext='RoomID : '.$textroomid;
 		}
 		
 		//สร้างข้อความตอบกลับ
