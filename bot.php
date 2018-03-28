@@ -18,7 +18,7 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			$replytext=$text;
 		}
 		
-		$textLineid='LINE ID :',$textusernew;
+		$textLineid='LINE ID :'.$textusernew;
 		
 		//สร้างข้อความตอบกลับ
 		$messages = [
