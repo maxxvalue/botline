@@ -16,7 +16,7 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		}
 		
 		/*เช็ค Userid Line*/
-		$textusernew1=$event['type']['user'];
+		$textusernew1=$event['source']['type'];
 		$textusernew=$event['source']['userId'];
 		$textLineid='LINE ID: '.$textusernew;
 		
