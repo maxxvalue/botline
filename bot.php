@@ -12,11 +12,11 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			$replytext='สวัสดีครับ';
 		}
 		else{
-			//$replytext=$text;
+			$replytext=$text;
 		}
 		
 		/*เช็ค Userid Line*/
-		if($replytext=='/id'){
+		if($text=='/id'){
 		$textusernew=$event['source']['userId'];
 		$textLineid='LINE ID: '.$textusernew;
 		}
