@@ -2,8 +2,9 @@
 $access_token='XK1Z6+XOO43h/LK5nIBkg63J7CrD4KupFFE64jlr9MubxnIhzBUoZWV4C1GQabfKOR00JPbAwXbxm3prq5WB53xBD2wk+GgBtblpHnz/o498xJFe9m+LKpipR4ezZ+U7kPHHfZStdK54yIj12BjK8wdB04t89/1O/w1cDnyilFU=';	//ใส่ access token ของเรา ****
 $content = file_get_contents('php://input');	//รับค่าจากล่องข้อความใน line
 $events = json_decode($content, true);			//เปลี่ยน json ที่ line ส่งมา ให้เป็น array
-if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข้อมูลส่งมาหรือไม่
-	foreach ($events['events'] as $event) {	
+$follow = json_decode($content, true);			//เปลี่ยน json ที่ line ส่งมา ให้เป็น array
+if (!is_null($events['events']) || is_null($follow['follow'])) {				//ตรวจสอบว่ามีข้อมูลส่งมาหรือไม่
+	foreach ($events['events'] as $event) || ($follow['follow'] as $event) {	
 		$replyToken=$event['replyToken'];		//Token สำหรับส่งข้อความกลับ
 		$text=$event['message']['text'];		//รับค่าข้อความที่ส่งเข้ามาในตัวแปร text
 		
@@ -16,7 +17,7 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		}
 		
 		/*เช็ค Userid Line*/
-		$textusernew1=$event['source']['type']['user'];
+		$textusernew1=$follow['Follow']['timestamp'];
 		$textusernew=$event['source']['userId'];
 		$textLineid='LINE ID: '.$textusernew;
 		
