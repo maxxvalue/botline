@@ -18,20 +18,22 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			$replytext=$text;
 		}
 		
-		$textusernew;
-		
 		//สร้างข้อความตอบกลับ
 		$messages = [
 			[
 			'type' => 'text',
 			'text' => $replytext 
 			]
+			,
+			[
+			'type' => 'text',
+			'text' => $textusernew 
+			]
 		];
 		$url = 'https://api.line.me/v2/bot/message/reply';	//url สำหรับตอบกลับ
 		$data = [
 			'replyToken' => $replyToken,		//replyToken ใส่ตรงนี้
 			'messages' => $messages,
-			'source' => $textusernew,
 		];
 		$post = json_encode($data);
 		$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
