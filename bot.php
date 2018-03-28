@@ -11,14 +11,14 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		if($text=='สวัสดี'){
 			$replytext='สวัสดีครับ';
 		}
-		else{
+		//else{
 			$replytext=$text;
-		}
+		//}
 		
 		/*เช็ค Userid Line*/
 		if($text=='/id'){
 		$textusernew=$event['source']['userId'];
-		$textLineid='LINE ID: '.$textusernew;
+		$replytext='\nLINE ID: '.$textusernew;
 		}
 		
 		
@@ -27,11 +27,6 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			[
 			'type' => 'text',
 			'text' => $replytext 
-			]
-			,
-			[
-			'type' => 'text',
-			'text' => $textLineid 
 			]
 		];
 		$url = 'https://api.line.me/v2/bot/message/reply';	//url สำหรับตอบกลับ
