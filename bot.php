@@ -19,6 +19,7 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		$textusernew=$event['source']['userId'];
 		$textLineid='LINE ID: '.$textusernew;
 		
+		$replytext1=$event['displayName'];
 		
 		//สร้างข้อความตอบกลับ
 		$messages = [
@@ -29,10 +30,16 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			,
 			[
 			'type' => 'text',
+			'text' => $replytext1
+			]
+			,
+			[
+			'type' => 'text',
 			'text' => $textLineid 
 			]
 		];
 		$url = 'https://api.line.me/v2/bot/message/reply';	//url สำหรับตอบกลับ
+		$url1 = 'https://api.line.me/v2/bot/profile/'.urlencode($textusernew);	//url Profile
 		$data = [
 			'replyToken' => $replyToken,		//replyToken ใส่ตรงนี้
 			'messages' => $messages,
@@ -47,40 +54,15 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);	//ส่ง header
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);	
 		curl_exec($ch);					//ส่งไปให้ไลน์ตอบกลับ
-	}
-}
-echo 'OK Reply';
-
-$events1 = json_decode($content, true);			//เปลี่ยน json ที่ line ส่งมา ให้เป็น array
-if (!is_null($events1['events'])) {				//ตรวจสอบว่ามีข้อมูลส่งมาหรือไม่
-	foreach ($events1['events'] as $event1) {	
-		$replyToken=$event1['replyToken'];		//Token สำหรับส่งข้อความกลับ
 		
-		$textusernew111=$event1['source']['userId'];
-		
-		//สร้างข้อความตอบกลับ
-		$messages = [
-			[
-			'type' => 'text',
-			'text' => $textusernew111 
-			]
-		];
-		$url1 = 'https://api.line.me/v2/bot/profile/'.$textusernew111;	//url สำหรับตอบกลับ
-		$data1 = [
-			'replyToken' => $replyToken,		//replyToken ใส่ตรงนี้
-			'messages' => $messages,
-		];
-		$post1 = json_encode($data1);
-		$headers1 = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
-														//headers สำหรับตอบกลับ
 		$ch1 = curl_init($url1);				//เริ่ม curl 
 		curl_setopt($ch1, CURLOPT_CUSTOMREQUEST, "POST");//ปรับเป็นแบบ post
 		curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);	
-		curl_setopt($ch1, CURLOPT_POSTFIELDS, $post1);	//ใส่ข้อความที่จะส่ง
-		curl_setopt($ch1, CURLOPT_HTTPHEADER, $headers1);	//ส่ง header
+		curl_setopt($ch1, CURLOPT_POSTFIELDS, $post);	//ใส่ข้อความที่จะส่ง
+		curl_setopt($ch1, CURLOPT_HTTPHEADER, $headers);	//ส่ง header
 		curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);	
 		curl_exec($ch1);					//ส่งไปให้ไลน์ตอบกลับ
 	}
 }
-echo 'OK Profile';
+echo 'OK Reply';
 ?>
