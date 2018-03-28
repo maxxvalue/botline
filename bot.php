@@ -18,6 +18,8 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			$replytext=$text;
 		}
 		
+		$textLineid='LINE ID :',$textusernew;
+		
 		//สร้างข้อความตอบกลับ
 		$messages = [
 			[
@@ -27,7 +29,7 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			,
 			[
 			'type' => 'text',
-			'text' => $textusernew 
+			'text' => $textLineid 
 			]
 		];
 		$url = 'https://api.line.me/v2/bot/message/reply';	//url สำหรับตอบกลับ
