@@ -15,12 +15,26 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			$replytext=$text;
 		//}
 		
-		/*เช็ค Userid Line*/
-		if($text=='/id'){
-		$textusernew=$event['source']['userId'];
-		$replytext='\nLINE ID: '.$textusernew;
+		/*BOT เชิญคนเข้ากลุ่ม + เช็คข้อมูล line*/
+		$AntiBot=$event['source']['userId'];
+		if($AntiBot != NULL){
+		//$replytext='ข้อมูลสมาชิกนี้ไม่ได้รับอนุญาติ';
+		}else{
+		$replytext='ข้อมูลสมาชิกนี้ไม่ได้รับอนุญาติ';
 		}
 		
+		
+		/*เช็ค Userid Line*/
+		if($text=='/iduser'){
+		$textusernew=$event['source']['userId'];
+		$replytext='LineID : '.$textusernew;
+		}
+		
+		/*เช็ค roomId Line*/
+		if($text=='/idroom'){
+		$textusernew=$event['source']['roomId'];
+		$replytext='RoomID : '.$textusernew;
+		}
 		
 		//สร้างข้อความตอบกลับ
 		$messages = [
