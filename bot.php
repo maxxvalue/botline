@@ -20,7 +20,8 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		}
 		
 		/*เช็ค Userid Line*/
-		if($text=='/iduser'){
+		//if($text=='/iduser')
+		{
 		$textuserid=$event['source']['userId'];
 		$replytext='LineID : '.$textuserid;
 		}
@@ -28,8 +29,8 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		/*เช็ค roomId Line*/
 		//if($text=='/idroom')
 		{
-		$textroomid=$event['source']['roomId'];
-		$replytext1='RoomID : '.$textroomid;
+		$textroomid=$event['source']['groupId'];
+		$replytext='groupId : '.$textroomid;
 		}
 		
 		//สร้างข้อความตอบกลับ
@@ -37,11 +38,6 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			[
 			'type' => 'text',
 			'text' => $replytext 
-			]
-			,
-			[
-			'type' => 'room',
-			'text' => $replytext1
 			]
 		];
 		$url = 'https://api.line.me/v2/bot/message/reply';	//url สำหรับตอบกลับ
