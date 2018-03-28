@@ -12,14 +12,13 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			$replytext='สวัสดีครับ';
 		}
 		else{
-			$replytext=$text;
+			//$replytext=$text;
 		}
 		
 		/*เช็ค Userid Line*/
 		$textusernew=$event['source']['userId'];
 		$textLineid='LINE ID: '.$textusernew;
 		
-		$replytext1=$event['displayName'];
 		
 		//สร้างข้อความตอบกลับ
 		$messages = [
@@ -33,10 +32,10 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			'text' => $textLineid 
 			]
 		];
-		//$url = 'https://api.line.me/v2/bot/message/reply';	//url สำหรับตอบกลับ
-		$url = 'https://api.line.me/v2/bot/profile/'.urlencode($textusernew);	//url Profile
+		$url = 'https://api.line.me/v2/bot/message/reply';	//url สำหรับตอบกลับ
+		//$url = 'https://api.line.me/v2/bot/profile/'.urlencode($textusernew);	//url Profile
 		$data = [
-			'replyToken' => $replytext1,		//replyToken ใส่ตรงนี้
+			'replyToken' => $replyToken,		//replyToken ใส่ตรงนี้
 			'messages' => $messages,
 		];
 		$post = json_encode($data);
