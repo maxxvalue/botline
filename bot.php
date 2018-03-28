@@ -37,6 +37,11 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 			'type' => 'text',
 			'text' => $replytext 
 			]
+			,
+			[
+			'type' => 'room',
+			'text' => $replytext 
+			]
 		];
 		$url = 'https://api.line.me/v2/bot/message/reply';	//url สำหรับตอบกลับ
 		//$url = 'https://api.line.me/v2/bot/profile/'.urlencode($textusernew);	//url Profile
