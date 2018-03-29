@@ -10,7 +10,11 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		
 		/*ตั้งคำ ถาม / คำตอบให้กับบอท*/
 		if($text=='สวัสดี'){
-			$replytext='สวัสดีครับ';
+		$replytext='สวัสดีครับ';
+		}
+		
+		if($text=='ต่าย'){
+		$replytext='หมาต่าย';
 		}
 
 		/*BOT เชิญคนเข้ากลุ่ม + เช็คข้อมูล line*/
@@ -20,14 +24,14 @@ if (!is_null($events['events'])) {				//ตรวจสอบว่ามีข�
 		}
 		
 		/*เช็ค Userid Line*/
-		//if($text=='/iduser')
+		if($text=='/iduser')
 		{
 		$textuserid=$event['source']['userId'];
 		$replytext='LineID : '.$textuserid;
 		}
 		
 		/*เช็ค roomId Line*/
-		//if($text=='/idroom')
+		if($text=='/idroom')
 		{
 		$textroomid=$event['source']['groupId'];
 		$replytext='groupId : '.$textroomid;
